@@ -1,0 +1,27 @@
+UPTONEWLINE (?:(.+?)\r)
+UPTOCOLON (((\w+)\:)|(%{WORDSPACE}+(\w+)\:))
+DESCRIPTION (%{WORDSPACE}+(%{INT}|\?)\,%{SPACE}+%{WORDSPACE}+%{INT})
+EVENTNAME (\w+)
+RESPONSE %{WORDSPACE}+
+PTAGVAL (([\w\-\.]+[\-\.][\w\-\.]+)|\?|%{INT}|(^$)|%{ALPHANUM})
+ANALYSISSYMBOL ((^$)|\?)
+REPORTID (%{ALPHANUM}\-)+%{ALPHANUM}
+HASHEDBUCKET (%{ALPHANUM}|\?)
+
+
+SEQNAME \[(.*?)\]
+F1 ^*DART No.* T
+F2 ^*Total.* Sequence
+F3 ^* Sequence .*$
+D77T2 ^.*(?=(Data:))
+UPTILLNEWLINE (?:(.+?)\\r)
+
+D263P1 ^.*(?=(Installed antivirus list))
+D263P2 ^*Installed antivirus list.*(?=(Installed antispyware list))
+D263P3 ^*Installed antispyware list.*(?=(Antivirus Turned On Or Off))
+D263P4 ^*Antivirus Turned On Or Off.*(?=(AntiSpyware Turned On Or Off))
+D263P5 ^*AntiSpyware Turned On Or Off.*(?=(Copio backup software status))
+D263P6 ^*Copio backup software status.*$
+
+D95P1 ^.*(?=(Results of))
+D95P2 ^*Results of file.*$

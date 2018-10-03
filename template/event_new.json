@@ -1,0 +1,34 @@
+{
+  "template" : "event_new_*",  
+  "settings" : {
+    "index.refresh_interval" : "60s",
+    "index.requests.cache.enable": false,
+    "index.queries.cache.enabled":false,
+    "index.mapping.total_fields.limit": 3000
+  },
+  "mappings" : {
+    "_default_" : {
+       "_all" : {"enabled" : true, "omit_norms" : true},
+       "dynamic_templates" : [ {
+         "message_field" : {
+           "match" : "message",
+           "match_mapping_type" : "text",
+           "mapping" : {
+             "type" : "text", "index" : "analyzed", "omit_norms" : true
+           }
+         }
+       }, {
+         "string_fields" : {
+           "match" : "*",
+           "match_mapping_type" : "text",
+           "mapping" : {
+             "type" : "text", "index" : "analyzed", "omit_norms" : true,
+               "fields" : {
+                 "raw" : {"type": "text", "index" : "not_analyzed"}
+               }
+           }
+         }
+       } ]
+    }
+  }
+}
